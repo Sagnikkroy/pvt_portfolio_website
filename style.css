@@ -1,16 +1,15 @@
-*{
-    background-color: black;
-    color: white;
-     font-family: "Roboto Mono", monospace;
+* {
+  background-color: black;
+  color: white;
+  font-family: "Roboto Mono", monospace;
   font-optical-sizing: auto;
 }
 
-.myname{
-    font-family: "Uchen", serif;
+.myname {
+  font-family: "Uchen", serif;
   font-weight: 400;
   font-style: normal;
 }
-
 
 .hero {
   position: relative;
@@ -41,7 +40,7 @@
 h1 {
   font-size: 2rem;
   margin-bottom: 20px;
-   font-family: "Uchen", serif;
+  font-family: "Uchen", serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -57,7 +56,7 @@ button {
   background: rgba(255, 255, 255, 0);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.407);
-  border-radius: 25px;
+ 
   padding: 10px 25px;
   cursor: pointer;
   transition: 0.3s ease;
@@ -75,4 +74,155 @@ button:hover {
 
 .socials a:hover {
   color: #fff;
+}
+
+.About {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 10px ;
+  background: black;
+}
+
+
+.card-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ✅ Keep wrapper minimal — remove padding that broke layout */
+.card-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+}
+
+.card {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  overflow: visible;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+/* --- Corner Plus Signs --- */
+.card::before,
+.card::after,
+.corner-bottom-left,
+.corner-bottom-right {
+  position: absolute;
+  color: white;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  z-index: 3;
+}
+
+/* Top-left */
+.card::before {
+  content: '+';
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+/* Top-right */
+.card::after {
+  content: '+';
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+/* Bottom-left */
+.corner-bottom-left {
+  position: absolute;
+  content: '+';
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+}
+
+/* Bottom-right */
+.corner-bottom-right {
+  position: absolute;
+  content: '+';
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+}
+
+/* Left and Right Sections */
+.left-section {
+  flex: 1;
+  min-width: 350px;
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.right-section {
+  flex: 1.5;
+  min-width: 400px;
+  padding: 60px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-tag {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    width: 95%;
+    max-width: 95%;
+    margin: 0 auto;
+  }
+
+  .right-section {
+    padding: 30px 20px;
+  }
+
+  .card::before,
+  .card::after,
+  .corner-bottom-left,
+  .corner-bottom-right {
+    font-size: clamp(12px, 2.5vw, 18px);
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  }
 }
