@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagnik Roy | Blogs</title>
+    <style>
+        /* ---------- YOUR ORIGINAL STYLES (unchanged) ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Roboto Mono", monospace;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #ffffff8d;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .blog-posts h2 {
+            font-family:"Uchen", serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .post {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eeeeee90;
+        }
+
+        .post:last-child {
+            border-bottom: none;
+        }
+
+        .post h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .post h3 a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .post h3 a:hover {
+            color: #96a7fe;
+            text-decoration: underline;
+        }
+
+        .post .date {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ---------- TIMELINE: PERFECT CENTERING ---------- */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+            text-align: left;
+            padding-top: 2rem;
+        }
+
+        /* Vertical line: 1px, centered under circles */
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0.75rem;           /* exact center of the line */
+            width: 1px;
+            background: #555;
+            z-index: 0;
+        }
+
+       
+
+        /* Keep original borders */
+        .post {
+            border-bottom: 1px solid #eeeeee90;
+        }
+        .post:last-child {
+            border-bottom: none;
+        }
+
+        /* Responsive: adjust line & circle position */
+        @media (max-width: 480px) {
+            .timeline {
+                padding-left: 2rem;
+            }
+            .timeline::before,
+            .post::before {
+                left: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <a href="../index.html">Home</a>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="bloghome.html">Blogs</a></li>
+                    
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Timeline with perfect circle alignment -->
+        <section class="timeline">
+            <article class="post">
+                <h3><a href="/blog/training-cartpole-with-ppo"> Applying OCR & Digital Ink Recognition Without Spatial Constraints</a></h3>
+                <p class="date">November 6, 2025</p>
+            </article>
+
+            <article class="post">
+                <h3><a href="/blog/godelian-mind-penrose">The Gödelian Mind: Penrose's Argument against Artificial Consciousness</a></h3>
+                <p class="date">January 12, 2025</p>
+            </article>
+
+            <article class="post">
+                <h3><a href="/blog/psychology-serial-killer">The Psychology of a Serial Killer</a></h3>
+                <p class="date">December 26, 2022</p>
+            </article>
+
+            
+        </section>
+    </div>
+</body>
+</html>

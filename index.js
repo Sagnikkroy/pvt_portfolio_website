@@ -25,7 +25,7 @@ function butterflyEquation(t) {
 
 function calculateButterflyPoints() {
     const points = [];
-    const scale = 40;
+    const scale = 45;
     const cx = canvas.width / 2;
     const cy = canvas.height / 2 -180;
 
