@@ -1,118 +1,150 @@
+/*
+ * Global Reset and Fonts
+ */
 * {
-  background-color: black;
-  color: white;
-  font-family: "Roboto Mono", monospace;
-  font-optical-sizing: auto;
+    /* Essential for responsive design: ensures padding and border are included in the element's total width/height */
+    box-sizing: border-box; 
+    /* Apply base styles */
+    background-color: black;
+    color: white;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    /* Reset default margins and padding */
+    margin: 0; 
+    padding: 0;
 }
 
+/* Specific font for name */
 .myname {
-  font-family: "Uchen", serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Uchen", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
+/*
+ * Hero Section
+ */
 .hero {
-  position: relative;
-  height: 95vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* content stays below the butterfly */
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
+    position: relative;
+    /* Use min-height for flexibility on content size */
+    min-height: 95vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Content near the bottom */
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px 0; 
 }
 
 #canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
 .content {
-  position: relative;
-  z-index: 2;
-  padding-bottom: 10px; /* push content slightly above the bottom edge */
+    position: relative;
+    z-index: 2;
+    /* Use viewport height for better scaling on different devices */
+    padding-bottom: 5vh; 
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%; /* Ensure content respects padding and width */
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  font-family: "Uchen", serif;
-  font-weight: 400;
-  font-style: normal;
+    /* Fluid typography for large name */
+    font-size: clamp(2.5rem, 8vw, 4rem); 
+    margin-bottom: 20px;
+    font-family: "Uchen", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.tagline {
+    /* Fluid typography for tagline */
+    font-size: clamp(0.9rem, 3vw, 1.2rem); 
+    margin-bottom: 30px;
 }
 
 .buttons {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-bottom: 20px;
+    display: flex;
+    /* Allow buttons to wrap */
+    flex-wrap: wrap; 
+    gap: 10px; 
+    justify-content: center;
+    margin-bottom: 25px;
 }
 
 button {
-  background: rgba(255, 255, 255, 0);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.407);
- 
-  padding: 10px 25px;
-  cursor: pointer;
-  transition: 0.3s ease;
+    background: rgba(255, 255, 255, 0);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.407);
+    /* Fluid padding */
+    padding: 10px clamp(15px, 4vw, 25px); 
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 0.9rem; 
 }
 
 button:hover {
-  background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .socials a {
-  color: #aaa;
-  text-decoration: none;
-  transition: 0.3s;
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+    /* Added padding for easier tapping */
+    padding: 0 5px; 
 }
 
 .socials a:hover {
-  color: #fff;
+    color: #fff;
 }
 
+/*
+ * About Section
+ */
 .About {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  padding: 10px ;
-  background: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Increased vertical padding */
+    padding: 50px 15px; 
+    background: black;
+    /* Ensure section takes up a good amount of vertical space */
+    min-height: 100vh; 
 }
 
 .card-container {
-  position: relative;
-  width: 100%;
-  max-width: 1100px;
-  display: flex;
-  justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 1000px; 
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
 
-/* ✅ Keep wrapper minimal — remove padding that broke layout */
-.card-wrapper {
-  position: relative;
-  display: inline-block;
-  margin: auto;
-}
+/* Removed the unused .card-wrapper */
 
 .card {
-  position: relative;
-  width: 100%;
-  
-  display: flex;
-  flex-wrap: wrap;
-  background: rgba(255, 255, 255, 0);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  overflow: visible;
-  margin: auto;
-  box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    display: flex;
+    /* Essential for mobile stacking */
+    flex-wrap: wrap; 
+    background: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    overflow: visible;
+    margin: auto;
+    box-sizing: border-box;
 }
 
 /* --- Corner Plus Signs --- */
@@ -120,108 +152,291 @@ button:hover {
 .card::after,
 .corner-bottom-left,
 .corner-bottom-right {
-  position: absolute;
-  color: white;
-  font-size: 22px;
-  font-weight: 300;
-  line-height: 1;
-  z-index: 3;
+    position: absolute;
+    content: '+'; 
+    color: white;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1;
+    z-index: 3;
+    /* CSS variable for offset control in media queries */
+    --corner-offset: 50%; 
 }
 
 /* Top-left */
-.card::before {
-  content: '+';
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-}
+.card::before { top: 0; left: 0; transform: translate(calc(-1 * var(--corner-offset)), calc(-1 * var(--corner-offset))); }
 
 /* Top-right */
-.card::after {
-  content: '+';
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
-}
+.card::after { top: 0; right: 0; transform: translate(var(--corner-offset), calc(-1 * var(--corner-offset))); }
 
 /* Bottom-left */
-.corner-bottom-left {
-  position: absolute;
-  content: '+';
-  bottom: 0;
-  left: 0;
-  transform: translate(-50%, 50%);
-}
+.corner-bottom-left { bottom: 0; left: 0; transform: translate(calc(-1 * var(--corner-offset)), var(--corner-offset)); }
 
 /* Bottom-right */
-.corner-bottom-right {
-  position: absolute;
-  content: '+';
-  bottom: 0;
-  right: 0;
-  transform: translate(50%, 50%);
-}
+.corner-bottom-right { bottom: 0; right: 0; transform: translate(var(--corner-offset), var(--corner-offset)); }
 
 /* Left and Right Sections */
 .left-section {
-  flex: 1;
-  min-width: 350px;
+    /* Adjusted flex-basis for better balance before wrapping */
+    flex: 1 1 300px; 
+    min-width: 0; 
 }
 
 .image-wrapper {
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Minimum height for better appearance on desktop and mobile stack */
+    min-height: 250px; 
 }
 
 .right-section {
-  flex: 1.5;
-  min-width: 400px;
-  padding: 60px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
+    /* Adjusted flex-basis for better balance before wrapping */
+    flex: 2 1 450px; 
+    min-width: 0;
+    padding: 40px; 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.right-section h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 5px;
+}
+
+.right-section h3 {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.right-section p {
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; 
+    margin-top: 10px;
 }
 
 .skill-tag {
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 0.9rem;
+    padding: 6px 12px; 
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem; 
+    white-space: nowrap; 
 }
 
-/* --- Responsive Adjustments --- */
+/*
+ * --- Responsive Adjustments ---
+ */
+
+/* Medium Screens (e.g., Tablets in Portrait) */
+@media (max-width: 850px) {
+    .card-container {
+        padding: 10px;
+    }
+}
+
+/* Mobile Screens (Stacking Layout) */
 @media (max-width: 768px) {
-  .card {
-    flex-direction: column;
-    width: 95%;
-    max-width: 95%;
+    .card {
+        /* Force single column layout for mobile */
+        flex-direction: column; 
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .left-section {
+        min-width: 100%; 
+    }
+
+    .image-wrapper img {
+        height: auto;
+        min-height: 200px; /* Adjust minimum height for image on mobile */
+    }
+
+    .right-section {
+        min-width: 100%;
+        padding: 30px 20px; /* Reduced padding for mobile screens */
+        gap: 15px;
+    }
+
+    /* Smaller corners for mobile */
+    .card::before,
+    .card::after,
+    .corner-bottom-left,
+    .corner-bottom-right {
+        font-size: 16px;
+        --corner-offset: 35%; 
+    }
+}
+/*
+ * Projects Section Styling
+ */
+.Projects {
+    width: 100%;
+    /* Use padding to create separation from other sections */
+    padding: 80px 15px; 
+    text-align: center;
+    background: black;
+}
+
+.Projects h2 {
+    /* Use a similar font size scale to the About section headers */
+    font-size: clamp(2rem, 5vw, 3rem); 
+    margin-bottom: 50px;
+    font-family: "Uchen", serif;
+    font-weight: 400;
+}
+
+.card-grid {
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-  }
+    display: grid;
+    /* Default: 3 equal columns */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
+}
 
-  .right-section {
-    padding: 30px 20px;
-  }
+.project-card {
+    background: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle background blur */
+    backdrop-filter: blur(5px); 
+    padding: 25px;
+    text-align: left;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    /* Optional: Small lift on hover for a cool effect */
+    will-change: transform; 
+}
 
-  .card::before,
-  .card::after,
-  .corner-bottom-left,
-  .corner-bottom-right {
-    font-size: clamp(12px, 2.5vw, 18px);
-    text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
-  }
+.project-card:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-5px);
+}
+
+.project-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background: rgba(255, 255, 255, 0.05); /* Dark image placeholder */
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.project-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tech-tag {
+    /* Use the same style as skill-tag for consistency */
+    padding: 6px 12px; 
+    background: rgba(73, 102, 237, 0.1); /* Slightly blue/techy background */
+    border: 1px solid rgba(73, 102, 237, 0.3);
+    font-size: 0.75rem; 
+    color: #92b0ff; /* Light blue text */
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.project-links a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 15px;
+    border: 1px solid white;
+    transition: background 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.project-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/*
+ * Projects Media Queries
+ */
+@media (max-width: 900px) {
+    /* Change to 2 columns on medium screens */
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    }
+}
+
+@media (max-width: 768px) {
+    .Projects {
+        padding: 60px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Change to 1 column on small screens */
+    .card-grid {
+        grid-template-columns: 1fr; 
+    }
+    .project-card {
+        padding: 20px;
+    }
+}
+/* Small Mobile Screens (Button Stacking) */
+@media (max-width: 480px) {
+    .buttons {
+        /* Make hero buttons stack vertically */
+        flex-direction: column; 
+        gap: 8px;
+    }
+
+    button {
+        padding: 12px 0;
+        width: 100%; /* Full width buttons */
+    }
+
+    .socials a {
+        font-size: 0.85rem;
+    }
+
+    .right-section {
+        padding: 20px 15px; /* Tighter padding for very small screens */
+        gap: 10px;
+    }
+    
+    .right-section p {
+        font-size: 0.9rem;
+    }
 }

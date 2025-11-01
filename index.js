@@ -27,7 +27,7 @@ function calculateButterflyPoints() {
     const points = [];
     const scale = 45;
     const cx = canvas.width / 2;
-    const cy = canvas.height / 2 -120;
+    const cy = canvas.height / 2 -180;
 
     for (let i = 0; i < 2500; i++) {
         const t = (i / 2500) * 12 * Math.PI;
