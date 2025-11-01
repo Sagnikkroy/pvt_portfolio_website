@@ -1,4 +1,4 @@
-const canvas = document.getElementById('canvas');
+const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
 // --- Canvas Setup ---
@@ -27,7 +27,7 @@ function calculateButterflyPoints() {
     const points = [];
     const scale = 40;
     const cx = canvas.width / 2;
-    const cy = canvas.height / 2 -200;
+    const cy = canvas.height / 2 -180;
 
     for (let i = 0; i < 2500; i++) {
         const t = (i / 2500) * 12 * Math.PI;

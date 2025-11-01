@@ -68,7 +68,7 @@ section.visible, .project-card.visible {
     padding: 20px 0; 
 }
 
-#canvas {
+#canvas1 {
     position: absolute;
     top: 0;
     left: 0;
