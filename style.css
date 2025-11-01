@@ -14,6 +14,37 @@
     padding: 0;
 }
 
+/* 1. Initial State (Hidden, Lowered, Blurred) */
+/* This now applies to all sections and project cards */
+section, .project-card { 
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(50px); /* Default for most sections and cards */
+    
+    /* CRITICAL: This line tells the browser to animate property changes over 0.8 seconds */
+    transition: opacity 0.8s ease-out, 
+                transform 0.8s ease-out, 
+                filter 0.8s ease-out;
+    
+    /* Added will-change to hint browser for smoother animation */
+    will-change: opacity, transform, filter; 
+}
+
+/* OVERRIDE for the Hero section's initial state: only fade/blur, no slide-up */
+.hero {
+    transform: translateY(0); /* Hero starts at its final Y position */
+}
+
+
+/* 2. Final State (Visible, Normal Position, Clear) */
+/* This remains the same, triggered by adding the 'visible' class in JavaScript */
+section.visible, .project-card.visible {
+    /* When JavaScript adds the 'visible' class, the element moves to these styles */
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0); /* All visible elements end at Y position 0 */
+}
+
 /* Specific font for name */
 .myname {
     font-family: "Uchen", serif;
@@ -22,7 +53,7 @@
 }
 
 /*
- * Hero Section
+ * Hero Section (rest of hero styles, unchanged)
  */
 .hero {
     position: relative;
@@ -414,17 +445,20 @@ button:hover {
         padding: 20px;
     }
 }
+
 /* Small Mobile Screens (Button Stacking) */
 @media (max-width: 480px) {
     .buttons {
-        /* Make hero buttons stack vertically */
-        flex-direction: column; 
+        /* FIX: Keep buttons side-by-side on mobile */
+        flex-direction: row; 
+        flex-wrap: nowrap; /* Prevent unwanted wrapping */
         gap: 8px;
     }
 
     button {
-        padding: 12px 0;
-        width: 100%; /* Full width buttons */
+        /* FIX: Revert to auto width and tighten padding so they fit horizontally */
+        width: auto; 
+        padding: 10px 8px; 
     }
 
     .socials a {
