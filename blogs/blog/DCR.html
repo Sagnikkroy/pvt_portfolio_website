@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <title>Applying OCR & Digital Ink Recognition Without Spatial Constraints</title>
+    <style>
+        :root {
+            --bg-color: #000;
+            --text-color: #fff;
+            --secondary-text: #aaa;
+            --accent-color: #00bcd4;
+            --border-color: #222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Header / Navigation */
+        header {
+            width: 100%;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: var(--secondary-text);
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-color);
+        }
+
+        header .title {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            line-height: 1.2;
+        }
+
+        /* Article Layout */
+        main {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 2.00rem;
+        }
+
+        article h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        article .meta {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        article h2 {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        article p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        img, svg {
+            display: block;
+            max-width: 100%;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+        }
+
+        /* Graph styling */
+        .graph-container {
+            background: transparent;
+            border: 1px solid transparent;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 300px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header .title {
+                font-size: 0.8rem;
+            }
+
+            article h1 {
+                font-size: 1.5rem;
+            }
+
+            article h2 {
+                font-size: 1.2rem;
+            }
+
+            article p, li {
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 0 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <button class="back-btn" onclick="window.history.back()">🡰</button>
+        <div class="title">Applying OCR & Digital Ink Recognition Without Spatial Constraints<br>[ November 6, 2025 ]</div>
+    </header>
+
+    <!-- Blog Content -->
+    <main>
+        <article>
+            <h1>Applying OCR & Digital Ink Recognition Without Spatial Constraints</h1>
+            <div class="meta">Written by Sagnik Roy · November 6, 2025</div>
+
+            <p>
+                Recently I've been working on a project that required a solution for a very unique set of problems in the realm of Optical Character Recognition (OCR) and Digital Ink Recognition (DIR). 
+                The challenge was to accurately recognize handwritten text without any spatial constraints — meaning the text could be written anywhere on a digital canvas without predefined lines or boxes.
+            </p>
+
+            <h2>1. Introduction</h2>
+            <p>
+                Traditional OCR systems rely heavily on structured input — printed text, straight baselines, and predictable spacing. But in a digital canvas or note-taking environment, handwriting may overlap, float, or curve freely. 
+                That’s where spatially unconstrained OCR and DIR come into play.
+            </p>
+            <img src="assets/example.svg" alt="Example Drawing from assets">
+
+            <h2>2. Key Concepts</h2>
+            <ul>
+                <li><strong>Segmentation-Free Recognition:</strong> Recognizing text without bounding boxes.</li>
+                <li><strong>Context-Aware Models:</strong> Using spatial embeddings to infer relationships.</li>
+                <li><strong>Dynamic Line Detection:</strong> Allowing flexible layouts for handwritten notes.</li>
+            </ul>
+
+            <h2>3. Visual Overview</h2>
+            <p>
+                Below is a sample visualization representing how recognition accuracy changes with spatial flexibility:
+            </p>
+
+            <div class="graph-container">
+                <canvas id="barGraph"></canvas>
+            </div>
+
+            <h2>4. Conclusion</h2>
+            <p>
+                Spatially unconstrained OCR and DIR open the doors to next-generation note-taking and creative interfaces.
+                By removing the limitations of structure, recognition models can become adaptive to human freedom of expression — not just printed text.
+            </p>
+
+            <img src="assets/another-image.jpg" alt="Example Image Illustration">
+        </article>
+    </main>
+
+    <!-- Simple Bar Graph Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('barGraph').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Constrained', 'Semi-Free', 'Unconstrained'],
+                datasets: [{
+                    label: 'Recognition Accuracy (%)',
+                    data: [95, 89, 84],
+                    backgroundColor: ['#00bcd4', '#0097a7', '#006064']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { labels: { color: '#fff' } }
+                },
+                scales: {
+                    x: { ticks: { color: '#aaa' }, grid: { color: '#222' } },
+                    y: { ticks: { color: '#aaa' }, grid: { color: '#222' } }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
