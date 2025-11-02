@@ -14,6 +14,7 @@
     padding: 0;
 }
 
+
 /* 1. Initial State (Hidden, Lowered, Blurred) */
 /* This now applies to all sections and project cards */
 section, .project-card { 
@@ -396,6 +397,23 @@ button:hover {
     color: #ccc;
     margin-bottom: 20px;
     line-height: 1.5;
+}
+.project-card .imp {
+    color: #a0a0a0;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+.project-card .imp b {
+    color: #c0c0c0;
+    font-size: 0.7rem;
+   
+ 
+}
+.project-card .imp .boldimp {
+    color: #ff0040;
+    font-size: 0.9rem;
+    
 }
 
 h3{
