@@ -13,6 +13,9 @@
     margin: 0; 
     padding: 0;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 
 /* 1. Initial State (Hidden, Lowered, Blurred) */

@@ -7,191 +7,231 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styledivide.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Uchen&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Uchen&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+        /* Add smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
     
     <section class="hero">
+        <canvas id="canvas1"></canvas>
+        
+        <div class="content">
+            <h1>Sagnik Roy</h1>
+            <p class="tagline">Distinguishing the signal from the magic</p>
+            <div class="buttons">
+                <a href="#about"><button>About</button></a>
+                <a href="#projects"><button>Projects</button></a>
+                <a href="blogs/bloghome.html"><button>Blogs</button></a>
+                <a href="#contact"><button>Contact</button></a>
+            </div>
+            <p class="socials">
+                <a href="https://github.com/Sagnikkroy" target="_blank">[ GitHub ] •</a> 
+                <a href="https://x.com/Sagnikkroy" target="_blank">[ 𝕏 ] •</a> 
+                <a href="https://www.linkedin.com/in/sagnikkroy/" target="_blank">[ LinkedIn ]</a>
+            </p>
+        </div>
+    </section>
 
-  <canvas id="canvas1"></canvas>
-  
-  <div class="content">
-    <h1>Sagnik Roy</h1>
-    <p class="tagline">Distinguishing the signal from the magic</p>
-    <div class="buttons">
-  <a href="about.html"><button>About</button></a>
-  <a href="projects.html"><button>Projects</button></a>
-  <a href="blogs/bloghome.html"><button>Blogs</button></a>
-  <a href="contact.html"><button>Contact</button></a>
-</div>
-    <p class="socials">
-      
-      <a href="https://github.com/" target="_blank">[ GitHub ] •</a> 
-      <a href="https://twitter.com/" target="_blank">[ 𝕏 ] •</a> 
-      <a href="https://linkedin.com/" target="_blank">[ LinkedIn ]</a>
-    </p>
-  </div>
-</section>
-
-<!-- Decorative Divider -->
+    <!-- Decorative Divider -->
     <div class="divider-section">
         <!-- Decorative stars/crosses -->
         <div class="star star-left"></div>
         <div class="star star-center"></div>
         <div class="star star-right"></div>
-
-       
     </div>
 
-
-<section class="About">
-    <div class="card-container">
-      <div class="card">
-        <span class="corner-bottom-left">+</span>
-        <span class="corner-bottom-right">+</span>
-        
-        <div class="left-section">
-          <div class="image-wrapper">
-            <img src="assests\1000071408.png" alt="Profile">
-          </div>
-        </div>
-        
-        <div class="right-section">
-          <h2>About Me</h2>
-          <h3>Deep Learning & MLOps Developer & NLP Specialist</h3>
-          <p>
-            I am driven by the power of data and advanced computation to create intelligent systems. My passion lies in building, training, and deploying robust Deep Learning models that tackle complex, real-world challenges.
-          </p>
-          <p>
-            Specializing in Natural Language Processing (NLP), I am proficient in leveraging
-            GRUs/LSTMs & transformer architectures for tasks like text generation, sentiment analysis, and
-            semantic search.
-          </p>
-          <div class="skills">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">PyTorch</span>
-            <span class="skill-tag">NLP</span>
-            <span class="skill-tag">Transformers</span>
-            <span class="skill-tag">BERT Models</span>
-            <span class="skill-tag">FastAPI</span>
-            <span class="skill-tag">Docker</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <section class="Projects">
-    <h2>Check my projects out</h2>
-    <div class="card-grid">
-       <div class="project-card">
-    <div class="project-image">
-        <!-- Replace 'your-image-path.jpg' with your actual image path or URL -->
-        <img src="assests/example1autocomplete.jpg" class="project-img">
-    </div>
-    <h3>GRU/LSTM based sentence AutoCompletion Model</h3>
-    <p>Created two GRU & LSTM based machine learning model from scratch for autocompleting sentences by character level predictions using NLP. Compared performance & deployed it via FastAPI & Docker.</p>
-    <div class="project-tech">
-        <span class="tech-tag">PyTorch</span>
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">Natural Language Processing</span>
-        <span class="tech-tag">Docker</span>
-        <span class="tech-tag">FastAPI</span>
-    </div>
-    <div class="project-links">
-        <a href="#" target="_blank">View Code</a>
-        <a href="#" target="_blank">Live Demo</a>
-        <a href="#" target="_blank">Details</a>
-    </div>
-</div>
-
-        <div class="project-card">
-            <div class="project-image-placeholder">
+    <section class="About" id="about">
+        <div class="card-container">
+            <div class="card">
+                <span class="corner-bottom-left">+</span>
+                <span class="corner-bottom-right">+</span>
                 
-            </div>
-            <h3>brocco : Ingridient Prediction system via customer history for Restaurants</h3>
-            <p>This project contains advanced raw data analysis of customer data and considers calender events, weekends, customer retention & history to predict ingredient demand accurately.</p>
-            <div class="project-tech">
-                <span class="tech-tag">Exploratory data analysis</span>
-                <span class="tech-tag">PyTorch</span>
-                <span class="tech-tag">Time Series forecasting</span>
-                <span class="tech-tag">Transformers</span>
-                <span class="tech-tag">LSTM</span>
-                <span class="tech-tag">FastAPI</span>
-                
-            </div>
-            <div class="project-links">
-                <a href="#" target="_blank">View Code</a>
-                <a href="#" target="_blank">Live Demo</a>
-                <a href="#" target="_blank">Details</a>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image-placeholder">
-                
-            </div>
-            <h3>Notes recognizer & memory based chat System</h3>
-            <p>This project is a subpart of a bigger personal project called Mynd. This system recognizes handwriting from seemingly infinite spaces and makes a intelligent query based chat systems with memory</p>
-            <div class="project-tech">
-                <span class="tech-tag">Retrieval Augmented Generation</span>
-                <span class="tech-tag">Vector DB</span>
-                <span class="tech-tag">LLMs(Gemini)</span>
-                <span class="tech-tag">MLKit</span>
-                <span class="tech-tag">System Architecture</span>
-            </div>
-            <div class="project-links">
-                
-                <a href="#" target="_blank">Details</a>
-            </div>
-            <p class="imp"><b class="boldimp">* </b>since this project is not yet live i've attached a <b>working demo video</b> in the details of this project</p>
-        </div>
-    </div>
-</section>
-  <div class="wave-divider">
-        <canvas id="waveCanvas"></canvas>
-    </div>
-<section class="Contact">
-    <div class="contact-form-wrapper">
-                <span class="corner-bottom-left-form">+</span>
-                <span class="corner-bottom-right-form">+</span>
-                
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
+                <div class="left-section">
+                    <div class="image-wrapper">
+                        <img src="assests\1000071408.png" alt="Profile">
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="right-section">
+                    <h2>About Me</h2>
+                    <h3>Deep Learning & MLOps Developer & NLP Specialist</h3>
+                    <p>
+                        I am driven by the power of data and advanced computation to create intelligent systems. My passion lies in building, training, and deploying robust Deep Learning models that tackle complex, real-world challenges.
+                    </p>
+                    <p>
+                        Specializing in Natural Language Processing (NLP), I am proficient in leveraging
+                        GRUs/LSTMs & transformer architectures for tasks like text generation, sentiment analysis, and
+                        semantic search.
+                    </p>
+                    <div class="skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">Transformers</span>
+                        <span class="skill-tag">BERT Models</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Docker</span>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
+
+    <section class="Projects" id="projects">
+        <h2>Check my projects out</h2>
+        <div class="card-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="assests/example1autocomplete.jpg" class="project-img">
+                </div>
+                <h3>GRU/LSTM based sentence AutoCompletion Model</h3>
+                <p>Created two GRU & LSTM based machine learning model from scratch for autocompleting sentences by character level predictions using NLP. Compared performance & deployed it via FastAPI & Docker.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Natural Language Processing</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">FastAPI</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" target="_blank">View Code</a>
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Details</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image-placeholder">
+                </div>
+                <h3>brocco : Ingridient Prediction system via customer history for Restaurants</h3>
+                <p>This project contains advanced raw data analysis of customer data and considers calender events, weekends, customer retention & history to predict ingredient demand accurately.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Exploratory data analysis</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">Time Series forecasting</span>
+                    <span class="tech-tag">Transformers</span>
+                    <span class="tech-tag">LSTM</span>
+                    <span class="tech-tag">FastAPI</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" target="_blank">View Code</a>
+                    <a href="#" target="_blank">Live Demo</a>
+                    <a href="#" target="_blank">Details</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image-placeholder">
+                </div>
+                <h3>Notes recognizer & memory based chat System</h3>
+                <p>This project is a subpart of a bigger personal project called Mynd. This system recognizes handwriting from seemingly infinite spaces and makes a intelligent query based chat systems with memory</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Retrieval Augmented Generation</span>
+                    <span class="tech-tag">Vector DB</span>
+                    <span class="tech-tag">LLMs(Gemini)</span>
+                    <span class="tech-tag">MLKit</span>
+                    <span class="tech-tag">System Architecture</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Details</a>
+                </div>
+                <p class="imp"><b class="boldimp">* </b>since this project is not yet live i've attached a <b>working demo video</b> in the details of this project</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave-divider">
+        <canvas id="waveCanvas"></canvas>
+    </div>
+
+    <section class="Contact" id="contact">
+        <div class="contact-form-wrapper">
+            <span class="corner-bottom-left-form">+</span>
+            <span class="corner-bottom-right-form">+</span>
+            
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xyzbakzk" method="POST">
+                <!-- Honeypot for spam protection -->
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                
+                <div id="formStatus"></div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
     <script src="index.js"></script>
     <script src="income.js"></script>
     <script src="borders.js"></script>
+    
+    <script>
+        // Contact form handling
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formStatus = document.getElementById('formStatus');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            formStatus.textContent = '';
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    formStatus.innerHTML = '<p style="color: #4CAF50; margin-top: 10px;">✓ Message sent successfully! I\'ll get back to you soon.</p>';
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                formStatus.innerHTML = '<p style="color: #f44336; margin-top: 10px;">✗ Oops! Something went wrong. Please try again.</p>';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+    </script>
     
 </body>
 </html>
