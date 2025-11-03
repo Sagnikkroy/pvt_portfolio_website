@@ -3,412 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me | Your Name</title>
+    <title>Sagnik Roy | About</title>
     <style>
-        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Roboto Mono", monospace;
         }
 
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #000000;
+            color: #ffffff;
             line-height: 1.6;
+            padding: 2rem 1rem;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 640px;
             margin: 0 auto;
-            padding: 0 20px;
         }
 
-        /* Header Styles */
         header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2c3e50;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #3498db;
-        }
-
-        .nav-links a.active {
-            color: #3498db;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            color: white;
             text-align: center;
+            margin-bottom: 3rem;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* About Section */
-        .about-section {
-            padding: 80px 0;
-            background-color: #fff;
-        }
-
-        .about-content {
+        nav ul {
+            list-style: none;
             display: flex;
+            justify-content: center;
+            gap: 1.5rem;
             flex-wrap: wrap;
-            align-items: center;
-            gap: 50px;
+        }
+
+        nav a {
+            color: #ffffff8d;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eeeeee90;
         }
 
         .profile-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .profile-image img {
-            width: 100%;
-            max-width: 350px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-text {
-            flex: 2;
-            min-width: 300px;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #555;
-        }
-
-        /* Skills Section */
-        .skills-section {
-            padding: 80px 0;
-            background-color: #f8f9fa;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.5rem;
-            color: #2c3e50;
-        }
-
-        .skills-container {
+            margin: 0 auto 1.5rem;
+            background: #222;
+            border: 2px solid #555;
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
+            align-items: center;
             justify-content: center;
+            font-size: 3rem;
+            color: #888;
         }
 
-        .skill-category {
-            flex: 1;
-            min-width: 250px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .skill-category h3 {
-            margin-bottom: 20px;
-            color: #3498db;
-            text-align: center;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .skill-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 80px 0;
-            background-color: #fff;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .contact-item {
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .contact-item i {
+        .profile h1 {
             font-size: 2rem;
-            color: #3498db;
-            margin-bottom: 15px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        .contact-item h3 {
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
+        .profile .tagline {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
         .social-links a {
-            display: inline-block;
-            margin: 0 15px;
-            color: white;
-            font-size: 1.5rem;
-            transition: color 0.3s;
+            color: #ffffff8d;
+            text-decoration: none;
+            transition: color 0.2s;
         }
 
         .social-links a:hover {
-            color: #3498db;
+            color: #96a7fe;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        /* Content Sections */
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eeeeee90;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        section h2 {
+            font-family: "Uchen", serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+
+        section p {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid #555;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: #ffffff;
+        }
+
+        .timeline-item .period {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #cccccc;
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            border-color: #96a7fe;
+            color: #96a7fe;
+        }
+
+        /* CV Download Button */
+        .cv-download {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 2rem;
+            background: transparent;
+            border: 1px solid #ffffff8d;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .cv-download:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1.5rem 1rem;
             }
 
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .about-content {
-                flex-direction: column;
+            .profile h1 {
+                font-size: 1.6rem;
             }
 
             .profile-image {
-                margin-bottom: 30px;
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.95rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
+    <div class="container">
+        <header>
             <nav>
-                <a href="index.html" class="logo">Your Name</a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="bloghome.html">Blogs</a></li>
                 </ul>
             </nav>
-        </div>
-    </header>
+        </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>About Me</h1>
-            <p>Get to know my journey, skills, and what drives me</p>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-content">
-                <div class="profile-image">
-                    <img src="https://via.placeholder.com/350" alt="Your Name">
-                </div>
-                <div class="about-text">
-                    <h2>Hello, I'm [Your Name]</h2>
-                    <p>I'm a passionate [Your Profession] with [X] years of experience in [Your Field]. I specialize in [Your Specialties] and have worked with clients across various industries.</p>
-                    <p>My journey began when [Your Origin Story]. Since then, I've been dedicated to [Your Mission/Passion]. I believe in [Your Philosophy/Values].</p>
-                    <p>When I'm not working, you can find me [Your Hobbies/Interests]. I'm always looking for new challenges and opportunities to grow both personally and professionally.</p>
-                    <p>Feel free to browse my portfolio and get in touch if you'd like to work together!</p>
-                </div>
+        <!-- Profile Section -->
+        <div class="profile">
+            <div class="profile-image">
+                <!-- Replace this with an actual image -->
+                <span>SR</span>
+                <!-- <img src="your-photo.jpg" alt="Sagnik Roy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"> -->
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="skills-section">
-        <div class="container">
-            <h2 class="section-title">My Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Technical Skills</h3>
-                    <ul class="skill-list">
-                        <li>Web Development</li>
-                        <li>UI/UX Design</li>
-                        <li>JavaScript & Frameworks</li>
-                        <li>Responsive Design</li>
-                        <li>Version Control (Git)</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Professional Skills</h3>
-                    <ul class="skill-list">
-                        <li>Project Management</li>
-                        <li>Communication</li>
-                        <li>Problem Solving</li>
-                        <li>Team Collaboration</li>
-                        <li>Client Relations</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <ul class="skill-list">
-                        <li>Adobe Creative Suite</li>
-                        <li>VS Code</li>
-                        <li>Figma</li>
-                        <li>React</li>
-                        <li>Node.js</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>your.email@example.com</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <h3>Phone</h3>
-                    <p>+1 (123) 456-7890</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Location</h3>
-                    <p>Your City, Country</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
+            <h1>Sagnik Roy</h1>
+            <p class="tagline">Developer · Researcher · Writer</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+                <a href="mailto:your.email@example.com">Email</a>
+                <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
             </div>
-            <p>&copy; 2023 Your Name. All Rights Reserved.</p>
         </div>
-    </footer>
 
-    <script>
-        // Simple script for smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        <!-- About Section -->
+        <section class="about">
+            <h2>About Me</h2>
+            <p>
+                I'm a passionate developer and researcher focused on machine learning, computer vision, 
+                and digital recognition systems. My work explores the intersection of artificial intelligence 
+                and practical applications, with a particular interest in OCR and handwriting recognition.
+            </p>
+            <p>
+                When I'm not coding or researching, I enjoy writing about technology, contributing to 
+                open-source projects, and exploring new ways to solve complex problems through elegant solutions.
+            </p>
+        </section>
 
-        // Add active class to current page in navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentLocation = location.href;
-            const menuItem = document.querySelectorAll('.nav-links a');
-            const menuLength = menuItem.length;
+        <!-- Experience Section -->
+        <section class="experience">
+            <h2>Experience</h2>
             
-            for(let i = 0; i < menuLength; i++) {
-                if(menuItem[i].href === currentLocation) {
-                    menuItem[i].className = "active";
-                }
-            }
-        });
-    </script>
+            <div class="timeline-item">
+                <h3>Senior Developer</h3>
+                <p class="period">2023 - Present</p>
+                <p>Leading development of innovative AI-powered solutions, focusing on document processing and recognition systems.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Machine Learning Engineer</h3>
+                <p class="period">2021 - 2023</p>
+                <p>Developed and deployed ML models for computer vision tasks, improving accuracy by 40% across production systems.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Software Developer</h3>
+                <p class="period">2019 - 2021</p>
+                <p>Built scalable web applications and contributed to core infrastructure improvements.</p>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="education">
+            <h2>Education</h2>
+            
+            
+
+            <div class="timeline-item">
+                <h3>Bachelor of Technology</h3>
+                <p class="period">2013 - 2017</p>
+                <p>Computer Science and Engineering with focus on algorithms and data structures.</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">Machine Learning</div>
+                <div class="skill-tag">TensorFlow</div>
+                <div class="skill-tag">PyTorch</div>
+                <div class="skill-tag">Computer Vision</div>
+                <div class="skill-tag">OCR/ICR</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">React</div>
+                <div class="skill-tag">Node.js</div>
+                <div class="skill-tag">Docker</div>
+                <div class="skill-tag">Git</div>
+                <div class="skill-tag">AWS</div>
+            </div>
+        </section>
+
+        <!-- CV Download Section -->
+        <section class="cv" style="text-align: center; border: none;">
+            <h2>Curriculum Vitae</h2>
+            <a href="path/to/your-cv.pdf" class="cv-download" download>Download CV (PDF)</a>
+        </section>
+    </div>
 </body>
 </html>
