@@ -396,13 +396,13 @@
                 });
                 
                 if (response.ok) {
-                    formStatus.innerHTML = '<p style="color: #4CAF50; margin-top: 10px;">✓ Message sent successfully! I\'ll get back to you soon.</p>';
+                    formStatus.innerHTML = '<p style="color: #FFFFFFFF; margin-top: 10px;">✓ Message sent successfully! I\'ll get back to you soon.</p>';
                     form.reset();
                 } else {
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
-                formStatus.innerHTML = '<p style="color: #f44336; margin-top: 10px;">✗ Oops! Something went wrong. Please try again.</p>';
+                formStatus.innerHTML = '<p style="color: #f44336; margin-top: 10px;"> Oops! Something went wrong.</p>';
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
