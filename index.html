@@ -17,6 +17,95 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Contact Icons Styles */
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+        
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .contact-icon:hover {
+            
+            transform: translateY(-1px);
+        }
+
+        .contact-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .contact-icon-tooltip {
+            position: absolute;
+            bottom: -35px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-icon:hover .contact-icon-tooltip {
+            opacity: 1;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2a2a2a;
+            color: white;
+            padding: 15px 25px;
+            
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            animation: slideIn 0.3s ease, slideOut 0.3s ease 2.7s;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -157,7 +246,35 @@
         <div class="contact-form-wrapper">
             <span class="corner-bottom-left-form">+</span>
             <span class="corner-bottom-right-form">+</span>
-            
+            <p class="center">Message me on</p>
+            <!-- Contact Icons -->
+            <div class="contact-icons">
+                <!-- Email Icon -->
+                <div class="contact-icon" id="emailIcon" title="Copy Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <span class="contact-icon-tooltip">Click to copy email</span>
+                </div>
+
+                <!-- X (Twitter) Icon -->
+                <a href="https://x.com/Sagnikkroy" target="_blank" class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    <span class="contact-icon-tooltip">Follow on X</span>
+                </a>
+
+                <!-- LinkedIn Icon -->
+                <a href="https://www.linkedin.com/in/sagnikkroy/" target="_blank" class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                    <span class="contact-icon-tooltip">Connect on LinkedIn</span>
+                </a>
+            </div>
+            <p class="center">or</p>
+
             <form class="contact-form" id="contactForm" action="https://formspree.io/f/xyzbakzk" method="POST">
                 <!-- Honeypot for spam protection -->
                 <input type="text" name="_gotcha" style="display:none">
@@ -230,6 +347,27 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
             }
+        });
+
+        // Email copy functionality
+        const emailIcon = document.getElementById('emailIcon');
+        const userEmail = 'your.email@example.com'; // Replace with your actual email
+
+        emailIcon.addEventListener('click', function() {
+            navigator.clipboard.writeText(userEmail).then(function() {
+                // Show notification
+                const notification = document.createElement('div');
+                notification.className = 'copy-notification';
+                notification.textContent = '✓ Email copied to clipboard!';
+                document.body.appendChild(notification);
+                
+                // Remove notification after animation
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }).catch(function(err) {
+                console.error('Failed to copy email: ', err);
+            });
         });
     </script>
     
