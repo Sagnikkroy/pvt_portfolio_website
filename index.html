@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sagnik Roy</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="styledivide.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +14,121 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <style>
-        /* Add smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
+        /* 1. Theme Variables - AT THE VERY TOP */
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.25);
+    --card-bg: rgba(255, 255, 255, 0.02);
+    --accent-blue: #92b0ff;
+}
 
+
+
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --border-color: rgba(0, 0, 0, 0.15);
+    --card-bg: rgba(0, 0, 0, 0.03);
+    --accent-blue: #0044ff;
+}
+
+
+/* Fix for Plus Signs and Decorative Stars */
+.star::before,
+.star::after,
+.card::before,
+.card::after,
+.corner-bottom-left,
+.corner-bottom-right,
+.corner-bottom-left-form,
+.corner-bottom-right-form {
+    background-color: var(--text-color) !important; /* Forces lines of plus signs to swap */
+    color: var(--text-color) !important;
+}
+
+/* Fix for SVG Icons (Socials & Contact) */
+svg, .contact-icon, .socials svg {
+    fill: var(--text-color) !important;
+    stroke: var(--text-color) !important;
+    transition: fill 0.4s ease;
+}
+
+/* Ensure the divider section background swaps */
+.divider-section, .wave-divider {
+    background-color: var(--bg-color) !important;
+}
+
+/* Optional: Make images slightly dimmer in dark mode for better contrast */
+[data-theme="light"] img {
+    filter: brightness(0.9);
+}
+
+/* 2. Global Reset - USE VARIABLES HERE */
+* {
+    box-sizing: border-box; 
+    background-color: transparent; 
+    color: var(--text-color); /* This ensures ALL text follows the theme */
+    font-family: "Roboto Mono", monospace;
+    margin: 0; 
+    padding: 0;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, filter 0.4s ease;
+}
+
+html, body {
+    background-color: var(--bg-color);
+    scroll-behavior: smooth;
+}
+
+/* 3. Hero & Content Fixes */
+.hero, .About, .Projects, .Contact, .divider-section {
+    background-color: var(--bg-color) !important;
+}
+
+h1, h2, h3, p, .tagline, .socials a {
+    color: var(--text-color) !important;
+}
+
+/* 4. Borders and Cards */
+button, 
+.card, 
+.project-card, 
+.contact-form-wrapper, 
+.contact-item, 
+.skill-tag, 
+.tech-tag,
+.project-links a,
+.form-group input,
+.form-group textarea {
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* Special tag colors */
+.tech-tag {
+    color: var(--accent-blue) !important;
+}
+
+/* Plus Signs (Corners) */
+.card::before, .card::after, .corner-bottom-left, .corner-bottom-right,
+.contact-form-wrapper::before, .contact-form-wrapper::after, 
+.corner-bottom-left-form, .corner-bottom-right-form {
+    color: var(--text-color) !important;
+}
+
+/* 5. Theme Toggle Button Styling */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    padding: 10px 20px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
         /* Hero Social Icons */
         .socials {
             display: flex;
@@ -147,7 +258,7 @@
     </style>
 </head>
 <body>
-    
+    <button id="themeToggle" class="theme-toggle">Light Mode</button>
     <section class="hero">
         <canvas id="canvas1"></canvas>
         
@@ -370,65 +481,97 @@
     <script src="income.js"></script>
     <script src="borders.js"></script>
     
+    
     <script>
-        // Contact form handling
-        const form = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formStatus = document.getElementById('formStatus');
 
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            formStatus.textContent = '';
-            
-            const formData = new FormData(form);
-            
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    formStatus.innerHTML = '<p style="color: #FFFFFFFF; margin-top: 10px;">✓ Message sent successfully! I\'ll get back to you soon.</p>';
-                    form.reset();
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                formStatus.innerHTML = '<p style="color: #f44336; margin-top: 10px;"> Oops! Something went wrong.</p>';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Message';
-            }
+        
+       // 1. Initial State Setup (Defaults to Light Mode)
+const themeToggle = document.getElementById('themeToggle');
+const userEmail = 'your.email@example.com'; 
+
+// IMPORTANT: Set initial butterfly values for Light Mode (Default)
+window.butterflyTheme = {
+    main: '#1D1D1D',       // Dark grey/black characters
+    lines: '100, 100, 100', // Grey lines
+    opacity: 0.25
+};
+
+// 2. Theme Toggle Logic
+themeToggle.addEventListener('click', () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const newTheme = isLight ? 'dark' : 'light';
+    
+    // Apply theme to the root element
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Update Material Icon: If it's light now, show 'dark_mode' icon (to switch to dark)
+    // If it's dark now, show 'light_mode' icon (to switch to light)
+    themeToggle.innerHTML = `<span class="material-symbols-outlined">${newTheme === 'light' ? 'dark_mode' : 'light_mode'}</span>`;
+    
+    updateCanvasColors(newTheme);
+});
+
+function updateCanvasColors(theme) {
+    if (theme === 'light') {
+        window.butterflyTheme.main = '#1D1D1D';
+        window.butterflyTheme.lines = '100, 100, 100';
+        window.butterflyTheme.opacity = 0.25;
+    } else {
+        window.butterflyTheme.main = '#ffffff';
+        window.butterflyTheme.lines = '255, 255, 255';
+        window.butterflyTheme.opacity = 0.3;
+    }
+
+    if (typeof particles !== 'undefined' && particles.length > 0) {
+        particles.forEach(p => {
+            p.color = getRandomColor(); 
         });
+    }
+}
 
-        // Email copy functionality
-        const emailIcon = document.getElementById('emailIcon');
-        const userEmail = 'your.email@example.com'; // Replace with your actual email
+// 3. Contact Form & Email Logic
+const form = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const formStatus = document.getElementById('formStatus');
 
-        emailIcon.addEventListener('click', function() {
-            navigator.clipboard.writeText(userEmail).then(function() {
-                // Show notification
-                const notification = document.createElement('div');
-                notification.className = 'copy-notification';
-                notification.textContent = '✓ Email copied to clipboard!';
-                document.body.appendChild(notification);
-                
-                // Remove notification after animation
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
-            }).catch(function(err) {
-                console.error('Failed to copy email: ', err);
-            });
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    formStatus.textContent = '';
+    
+    const formData = new FormData(form);
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
         });
+        
+        if (response.ok) {
+            formStatus.innerHTML = '<p style="color: var(--text-color); margin-top: 10px;">✓ Message sent successfully!</p>';
+            form.reset();
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        formStatus.innerHTML = '<p style="color: #f44336; margin-top: 10px;"> Oops! Something went wrong.</p>';
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+    }
+});
+
+const emailIcon = document.getElementById('emailIcon');
+emailIcon.addEventListener('click', function() {
+    navigator.clipboard.writeText(userEmail).then(function() {
+        const notification = document.createElement('div');
+        notification.className = 'copy-notification';
+        notification.textContent = '✓ Email copied to clipboard!';
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+    });
+});
     </script>
     
 </body>

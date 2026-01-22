@@ -1,24 +1,30 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
-// --- Canvas Setup ---
+// --- Theme Aware Variables ---
+// These will be updated by your Theme Switcher button
+window.butterflyTheme = {
+    main: '#B4B4B4',      // Character color (white in dark mode, black in light)
+    lines: '255, 255, 255', // Line color RGB (white in dark mode, grey in light)
+    opacity: 0.3          // Line opacity
+};
+
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 resizeCanvas();
+
 window.addEventListener('resize', () => {
     resizeCanvas();
     butterflyPoints = calculateButterflyPoints();
     initParticles();
 });
 
-// --- Character Setup ---
 const charPool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
-const numParticles = 500; // denser flow
+const numParticles = 500; 
 const particles = [];
 
-// --- Butterfly Curve ---
 function butterflyEquation(t) {
     return Math.exp(Math.sin(t)) - 2 * Math.cos(4 * t) + Math.pow(Math.sin((4 * t - Math.PI) / 24), 5);
 }
@@ -27,7 +33,7 @@ function calculateButterflyPoints() {
     const points = [];
     const scale = 45;
     const cx = canvas.width / 2;
-    const cy = canvas.height / 2 -180;
+    const cy = canvas.height / 2 - 180;
 
     for (let i = 0; i < 2500; i++) {
         const t = (i / 2500) * 12 * Math.PI;
@@ -41,20 +47,20 @@ function calculateButterflyPoints() {
 
 let butterflyPoints = calculateButterflyPoints();
 
-// --- Helpers ---
 function getRandomChar() {
     return charPool[Math.floor(Math.random() * charPool.length)];
 }
 
+// Updated: Uses the dynamic main color instead of hardcoded white
 function getRandomColor() {
     const rand = Math.random();
-    if (rand > 0.9) return '#ffb3d9';
-    else if (rand > 0.8) return '#b3d9ff';
-    else if (rand > 0.7) return '#b3ffec';
-    else return '#ffffff';
+    // Colorful ones: Made slightly darker/richer for Light Mode compatibility
+    if (rand > 0.9) return '#ff4da6'; // Vivid Pink
+    else if (rand > 0.8) return '#3399ff'; // Vivid Blue
+    else if (rand > 0.7) return '#00cc99'; // Vivid Teal
+    else return window.butterflyTheme.main; // DYNAMIC: Black or White
 }
 
-// --- Initialize Particles ---
 function initParticles() {
     particles.length = 0;
     for (let i = 0; i < numParticles; i++) {
@@ -69,14 +75,11 @@ function initParticles() {
 }
 initParticles();
 
-// --- Line Flow Variables ---
 let lineOffset = 0;
 const lineSpeed = 0.0003;
 const numLines = 6;
 const lineThickness = 1.0;
-let lineOpacity = 0.3; // 👈 adjustable master opacity for lines
 
-// --- Draw Flowing Butterfly Lines ---
 function drawFlowingLines() {
     ctx.lineWidth = lineThickness;
     ctx.lineCap = 'round';
@@ -90,42 +93,37 @@ function drawFlowingLines() {
         const visibleCount = Math.floor(butterflyPoints.length * visibleFraction);
 
         ctx.beginPath();
-
         for (let j = 0; j < visibleCount; j++) {
             const idx = (startIdx + j) % butterflyPoints.length;
             const p = butterflyPoints[idx];
             const cx = canvas.width / 2;
             const cy = canvas.height / 2;
             const scaleMult = 0.97 + i * 0.03;
-
             const x = cx + (p.x - cx) * scaleMult;
             const y = cy + (p.y - cy) * scaleMult;
-
             if (j === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
         }
 
         const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        grad.addColorStop(0, `rgba(255,255,255,0)`);
-        grad.addColorStop(0.5, `rgba(255,255,255,${0.7 * lineOpacity})`);
-        grad.addColorStop(1, `rgba(255,255,255,0)`);
+        const rgb = window.butterflyTheme.lines;
+        const op = window.butterflyTheme.opacity;
+        
+        grad.addColorStop(0, `rgba(${rgb},0)`);
+        grad.addColorStop(0.5, `rgba(${rgb},${0.7 * op})`);
+        grad.addColorStop(1, `rgba(${rgb},0)`);
 
         ctx.strokeStyle = grad;
         ctx.stroke();
     }
-
     lineOffset += lineSpeed;
     if (lineOffset > 1) lineOffset -= 1;
 }
 
-// --- Animation ---
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Flowing outlines
     drawFlowingLines();
 
-    // Animate small flowing characters
     particles.forEach(p => {
         p.progress += p.speed;
         if (p.progress >= 1) p.progress -= 1;
@@ -149,8 +147,6 @@ function animate() {
         ctx.textBaseline = 'middle';
         ctx.fillText(p.char, x, y);
     });
-
     requestAnimationFrame(animate);
 }
-
 animate();

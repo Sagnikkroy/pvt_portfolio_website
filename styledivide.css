@@ -1,3 +1,38 @@
+
+/* Fix: Ensure 'Get in touch' and other descriptions aren't stuck as white-opacity */
+.contact-info p, .tagline, .right-section h3, .project-card p {
+    color: var(--text-color) !important;
+    opacity: 0.8; /* Subtle opacity that works on both themes */
+}
+
+/* Theme Toggle Button Styling */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Circular button */
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: var(--card-hover-bg);
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    color: var(--text-color);
+}
+
 /* Divider Container */
         .divider-section {
             position: relative;
