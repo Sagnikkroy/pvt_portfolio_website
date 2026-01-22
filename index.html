@@ -110,6 +110,73 @@ button,
     color: var(--accent-blue) !important;
 }
 
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 40px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-card {
+    text-decoration: none; /* Removes underline from links */
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.blog-card:hover {
+    background: var(--card-hover-bg);
+    transform: translateY(-5px);
+    border-color: var(--accent-blue);
+}
+
+.blog-date {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+.blog-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.blog-card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Pushes footer to the bottom */
+}
+
+.blog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    font-size: 0.8rem;
+}
+
+.blog-footer .arrow {
+    color: var(--accent-blue);
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .arrow {
+    transform: translateX(5px);
+}
+
 /* Plus Signs (Corners) */
 .card::before, .card::after, .corner-bottom-left, .corner-bottom-right,
 .contact-form-wrapper::before, .contact-form-wrapper::after, 
@@ -345,6 +412,42 @@ button,
             </div>
         </div>
     </section>
+
+    <section class="Blogs" id="blogs">
+    <h2>Recent Articles & Blogs</h2>
+    <div class="blog-grid">
+        <a href="blogs/blog-post-1.html" class="blog-card">
+            <div class="blog-date">Jan 20, 2024</div>
+            <h3>Understanding Transformer Architectures</h3>
+            <p>A deep dive into how self-attention mechanism revolutionized NLP and why it matters for modern LLMs.</p>
+            <div class="blog-footer">
+               
+                <span class="arrow">→</span>
+            </div>
+        </a>
+
+        <a href="blogs/blog-post-2.html" class="blog-card">
+            <div class="blog-date">Dec 15, 2023</div>
+            <h3>MLOps: From Notebook to Production</h3>
+            <p>Moving past .ipynb files—strategies for versioning data and deploying models using Docker and FastAPI.</p>
+            <div class="blog-footer">
+                
+                <span class="arrow">→</span>
+            </div>
+        </a>
+
+        <a href="blogs/blog-post-3.html" class="blog-card">
+            <div class="blog-date">Nov 02, 2023</div>
+            <h3>The Signal vs. The Noise in Data</h3>
+            <p>How to identify high-quality features in messy datasets before starting the training process.</p>
+            <div class="blog-footer">
+               
+                <span class="arrow">→</span>
+            </div>
+        </a>
+    </div>
+</section>
+
 
     <section class="Projects" id="projects">
         <h2>Check my projects out</h2>
