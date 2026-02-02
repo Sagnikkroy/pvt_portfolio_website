@@ -204,7 +204,8 @@
             <p>A key architectural consideration in this system is the replacement of the pretrained model’s original classification head with a new task-specific output layer corresponding to the target NSFW categories. While the transformer backbone retains its pretrained parameters, the classification head is learned from scratch. This separation allows the model to adapt its final decision boundaries without disturbing the robust visual representations learned during pretraining. To enable this reconfiguration seamlessly, the training process explicitly tolerates dimensional mismatches between pretrained and task-specific components, ensuring a smooth transition from generic image understanding to domain-specific classification.</p>
             <p>Training is conducted using a high-level optimization framework that abstracts much of the boilerplate typically associated with deep learning workflows. This allowed me to focus on modeling decisions rather than low-level training mechanics, while still retaining full control over evaluation strategy, checkpointing, and optimization behavior. I opted for a conservative learning rate and applied weight decay regularization to reduce the risk of overfitting, particularly given the sensitive and potentially imbalanced nature of NSFW datasets. Batch sizes were intentionally kept small to accommodate hardware constraints and to maintain stable gradient updates when fine-tuning a large transformer model.</p>
             <p>Evaluation is tightly integrated into the training process and performed at regular intervals to monitor generalization performance. Accuracy is used as the primary evaluation metric, serving both as a progress indicator and as the criterion for selecting the best-performing model checkpoint. Rather than assuming that the final training epoch yields the optimal model, the system automatically retains the checkpoint that achieves the highest validation accuracy. This design choice reflects an emphasis on empirical performance over procedural completion and helps mitigate issues arising from late-stage overfitting.
-            <p>From a computational efficiency standpoint, the training pipeline incorporates mixed-precision computation when compatible hardware is available. This reduces memory consumption and accelerates training without compromising model quality, making the approach accessible even on mid-range GPUs. Additionally, checkpoint-based training resumption is supported by design, enabling long-running experiments to recover gracefully from interruptions and allowing training to be distributed across multiple sessions without loss of progress.</p>
+            <img src="./assests/confusion_matrix1.png" alt="Confusion Matrix Visualization">
+                <p>From a computational efficiency standpoint, the training pipeline incorporates mixed-precision computation when compatible hardware is available. This reduces memory consumption and accelerates training without compromising model quality, making the approach accessible even on mid-range GPUs. Additionally, checkpoint-based training resumption is supported by design, enabling long-running experiments to recover gracefully from interruptions and allowing training to be distributed across multiple sessions without loss of progress.</p>
             <p>Following model training, I conducted a structured post-hoc evaluation to assess real-world behavior beyond aggregate accuracy metrics. While validation accuracy provides a high-level signal of performance, it is often insufficient for sensitive tasks such as NSFW detection, where the cost of false positives can be particularly high. To address this, I implemented a targeted inference and auditing pipeline designed to systematically identify and analyze false positive predictions on previously unseen test data.</p>
             <p>The trained model is loaded using a high-level image classification inference interface, which abstracts away low-level tensor handling and allows the model to be evaluated in a deployment-like setting. This choice reflects a deliberate shift from training-time evaluation to inference-time behavior, ensuring that the model is assessed under conditions that closely resemble real-world usage. By running inference on a held-out test dataset that was never exposed during training or validation, the analysis provides a more reliable estimate of how the classifier behaves when confronted with novel inputs.</p>
             <p>A central focus of this evaluation is the identification of false positives—specifically, instances where images labeled as neutral are incorrectly classified as NSFW categories such as pornographic, hentai, or sexually suggestive content. This definition was chosen intentionally, as false positives in NSFW systems can lead to unnecessary censorship, degraded user experience, and ethical concerns when benign content is misclassified. Rather than treating all misclassifications equally, this targeted analysis prioritizes the most operationally costly errors.
@@ -224,16 +225,14 @@ In addition to batch-level auditing, I implemented a standalone inference utilit
 
 
 
-<ul>
-                <li><strong>Segmentation-Free Recognition:</strong> Recognizing text without bounding boxes.</li>
-                <li><strong>Context-Aware Models:</strong> Using spatial embeddings to infer relationships.</li>
-                <li><strong>Dynamic Line Detection:</strong> Allowing flexible layouts for handwritten notes.</li>
-            </ul>
+
 
             <h2>3. Visual Overview</h2>
             <p>
-                Below is a sample visualization representing how recognition accuracy changes with spatial flexibility:
+            
             </p>
+
+            
 
             <div class="graph-container">
                 <canvas id="barGraph"></canvas>
@@ -250,35 +249,101 @@ Equally important to me was the model’s reliability during inference. Whether 
 Ultimately, this project reinforced my belief that strong machine learning systems are not defined solely by architecture choice or benchmark metrics, but by the care taken in their design, evaluation, and validation. The final model represents more than a trained network—it reflects an iterative, deliberate process that prioritizes generalization, interpretability, and real-world applicability. I am genuinely proud of how this system turned out, and I see it as a solid foundation for future improvements, extensions, and responsible deployment.
             </p>
 
-            <img src="assets/another-image.jpg" alt="Example Image Illustration">
+            <img src="assets/confusion_matrix1.png" alt="confusion matrix">
         </article>
     </main>
 
-    <!-- Simple Bar Graph Script -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('barGraph').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Constrained', 'Semi-Free', 'Unconstrained'],
-                datasets: [{
-                    label: 'Recognition Accuracy (%)',
-                    data: [95, 89, 84],
-                    backgroundColor: ['#00bcd4', '#0097a7', '#006064']
-                }]
+   <script>
+let chart = null;
+
+function createChart() {
+    if (chart) return;
+
+    const ctx = document.getElementById('barGraph').getContext('2d');
+
+    chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                'Overall Accuracy',
+                'Precision (Weighted)',
+                'Safe Rate',
+                'F1-Score'
+            ],
+            datasets: [{
+                label: 'Model Performance (%)',
+                data: [93.8, 98.5, 99.61, 93.0],
+                backgroundColor: [
+                    '#FF8B32',
+                    '#F38A21',
+                    '#D45800',
+                    '#E87919'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1400,
+                easing: 'easeOutQuart'
             },
-            options: {
-                plugins: {
-                    legend: { labels: { color: '#fff' } }
+            plugins: {
+                legend: {
+                    labels: { color: '#ffffff' }
                 },
-                scales: {
-                    x: { ticks: { color: '#aaa' }, grid: { color: '#222' } },
-                    y: { ticks: { color: '#aaa' }, grid: { color: '#222' } }
+                datalabels: {
+                    color: '#ffffff',
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: value => value + '%',
+                    font: { weight: 'bold', size: 12 }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#cccccc' },
+                    grid: { color: '#222222' }
+                },
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: '#cccccc',
+                        callback: value => value + '%'
+                    },
+                    grid: { color: '#222222' }
                 }
             }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
+
+// OBSERVE THE *CONTAINER*, NOT THE CANVAS
+const target = document.querySelector('.graph-container');
+
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                createChart();
+                observer.disconnect(); // animate once
+            }
         });
-    </script>
+    },
+    {
+        threshold: 0.6 // triggers when 60% visible
+    }
+);
+
+observer.observe(target);
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 </body>
 </html>
