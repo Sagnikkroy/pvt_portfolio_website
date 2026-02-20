@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <title>Building the TRUST Ecosystem : NSFW Classifier</title>
+    <style>
+        :root {
+            --bg-color: #000;
+            --text-color: #fff;
+            --secondary-text: #aaa;
+            --accent-color: #00bcd4;
+            --border-color: #222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Header / Navigation */
+        header {
+            width: 100%;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: var(--secondary-text);
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-color);
+        }
+
+        header .title {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            line-height: 1.2;
+        }
+
+        /* Article Layout */
+        main {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 2.00rem;
+        }
+
+        article h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        article .meta {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        article h2 {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        article p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        img, svg {
+            display: block;
+            max-width: 100%;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+        }
+
+        /* Graph styling */
+        .graph-container {
+            background: transparent;
+            border: 1px solid transparent;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 300px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header .title {
+                font-size: 0.8rem;
+            }
+
+            article h1 {
+                font-size: 1.5rem;
+            }
+
+            article h2 {
+                font-size: 1.2rem;
+            }
+
+            article p, li {
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 0 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <button class="back-btn" onclick="window.history.back()">🡰</button>
+        <div class="title">Building the TRUST Ecosystem : NSFW Classifier<br>[ January 23, 2026 ]</div>
+    </header>
+
+    <!-- Blog Content -->
+    <main>
+        <article>
+            <h1>Building and Tuning an Autocompletion Model</h1>
+            <div class="meta">Written by Sagnik Roy · January 23, 2026</div>
+
+            <p>
+                Recently Ive been scrolling through X/Twitter and came across a post I couldnt believe was uncensored and I was struck that how is this open to see for everyone. It was a nude image of someone out of the blue on X. Then I started researching on content moderation techniques and felt that there has been a lot of issues with sites such as x, bluesky or other platforms so to speak in such matters. What I thought was these big companies arent able to block these content so what about smaller companies or startups who dont have the resources to do so. This led me to research on content moderation techniques and build a near SOTA Model which can help in such jobs for a platform.
+            </p>
+
+            <h2>1. Introduction</h2>
+            <p>
+                So we all know that UGC is the main backbone of social media or infact any platforms where more than one person interact with each other. Its cool BUT at the same time when unmoderated UGCs can go haywire and lead to a lot of issues such as hate speech, nudity, violence etc. So content moderation is the need of the hour for any platform which allows UGCs. There are various techniques to do so such as manual moderation, rule-based systems and AI-based systems. Manual moderation is not scalable and rule-based systems are not effective against sophisticated content. Hence AI-based systems are the way forward. So I think I am going to build a full scale content moderation system from scratch.</p>
+                <p>So to create the model I needed a high high-quality dataset. After searching htrough various sources and almost the entire internet I found a dataset hosted in huggingface called deepghs/nsfw_detect. I found this dataset to to consist of very high quality images and a well balanced distribution of classes.
+            </p>
+
+            <p>Namely</p>
+
+            <ul>
+                <li>drawings</li>
+                <li>hentai</li>
+                <li>neutral</li>
+                <li>porn</li>
+                <li>sexy</li>
+            </ul>
+
+            <p>
+                So after getting the dataset I did some exploratory data analysis to understand the distribution of classes and the quality of images. After that I preprocessed the images by resizing them to a fixed size and normalizing them. After that I split the dataset into training, validation and test sets. To be precise the data was split <b>80% Train, 10% Val and 10% Test</b>
+
+            </p>
+        
+            <img src="assets/example.svg" alt="Example Drawing from assets">
+
+            <h2>2. Technicalities</h2>
+
+            <p>I designed and trained a deep learning–based image classification system aimed at detecting and categorizing NSFW content using a transformer-based visual architecture. The core motivation behind this approach was to move beyond traditional convolutional pipelines and instead leverage recent advances in Vision Transformers (ViTs), which have demonstrated strong performance in capturing global image context. Given the semantic complexity and contextual sensitivity inherent in NSFW classification, I prioritized a model architecture capable of reasoning over entire images rather than relying solely on localized feature extraction.</p>
+            <p>The training pipeline is built around a transfer learning paradigm, where a Vision Transformer pretrained on large-scale image data serves as the foundational representation model. This choice was guided by the observation that low- and mid-level visual features—such as textures, shapes, and spatial relationships—are largely domain-agnostic, while higher-level semantic distinctions can be efficiently learned through task-specific fine-tuning. By initializing the model with pretrained weights, I significantly reduced the amount of data and training time required while improving convergence stability and overall generalization performance.</p>
+            <p>To support efficient experimentation and scalability, the dataset is managed using a disk-backed dataset framework that enables lazy loading and memory-efficient access. Rather than storing fully preprocessed image tensors, images are transformed dynamically at training time. This design decision allowed me to preserve the original dataset while maintaining flexibility in preprocessing choices, which is particularly useful when iterating on model architectures or adapting the pipeline to new datasets. It also minimizes storage overhead, an important consideration when working with large-scale image corpora.</p>
+            <p>Image preprocessing is performed using a vision-specific processor that mirrors the transformations applied during the model’s original pretraining. This includes spatial resizing, color normalization, and tensor formatting aligned with the Vision Transformer’s patch-based attention mechanism. Maintaining strict consistency between pretraining and fine-tuning preprocessing was a deliberate design choice, as even subtle mismatches in normalization or resolution can negatively impact transfer learning effectiveness. All images are explicitly converted to a standardized color format to ensure uniformity across diverse data sources.</p>
+            <p>A key architectural consideration in this system is the replacement of the pretrained model’s original classification head with a new task-specific output layer corresponding to the target NSFW categories. While the transformer backbone retains its pretrained parameters, the classification head is learned from scratch. This separation allows the model to adapt its final decision boundaries without disturbing the robust visual representations learned during pretraining. To enable this reconfiguration seamlessly, the training process explicitly tolerates dimensional mismatches between pretrained and task-specific components, ensuring a smooth transition from generic image understanding to domain-specific classification.</p>
+            <p>Training is conducted using a high-level optimization framework that abstracts much of the boilerplate typically associated with deep learning workflows. This allowed me to focus on modeling decisions rather than low-level training mechanics, while still retaining full control over evaluation strategy, checkpointing, and optimization behavior. I opted for a conservative learning rate and applied weight decay regularization to reduce the risk of overfitting, particularly given the sensitive and potentially imbalanced nature of NSFW datasets. Batch sizes were intentionally kept small to accommodate hardware constraints and to maintain stable gradient updates when fine-tuning a large transformer model.</p>
+            <p>Evaluation is tightly integrated into the training process and performed at regular intervals to monitor generalization performance. Accuracy is used as the primary evaluation metric, serving both as a progress indicator and as the criterion for selecting the best-performing model checkpoint. Rather than assuming that the final training epoch yields the optimal model, the system automatically retains the checkpoint that achieves the highest validation accuracy. This design choice reflects an emphasis on empirical performance over procedural completion and helps mitigate issues arising from late-stage overfitting.
+            <img src="./assests/confusion_matrix1.png" alt="Confusion Matrix Visualization">
+                <p>From a computational efficiency standpoint, the training pipeline incorporates mixed-precision computation when compatible hardware is available. This reduces memory consumption and accelerates training without compromising model quality, making the approach accessible even on mid-range GPUs. Additionally, checkpoint-based training resumption is supported by design, enabling long-running experiments to recover gracefully from interruptions and allowing training to be distributed across multiple sessions without loss of progress.</p>
+            <p>Following model training, I conducted a structured post-hoc evaluation to assess real-world behavior beyond aggregate accuracy metrics. While validation accuracy provides a high-level signal of performance, it is often insufficient for sensitive tasks such as NSFW detection, where the cost of false positives can be particularly high. To address this, I implemented a targeted inference and auditing pipeline designed to systematically identify and analyze false positive predictions on previously unseen test data.</p>
+            <p>The trained model is loaded using a high-level image classification inference interface, which abstracts away low-level tensor handling and allows the model to be evaluated in a deployment-like setting. This choice reflects a deliberate shift from training-time evaluation to inference-time behavior, ensuring that the model is assessed under conditions that closely resemble real-world usage. By running inference on a held-out test dataset that was never exposed during training or validation, the analysis provides a more reliable estimate of how the classifier behaves when confronted with novel inputs.</p>
+            <p>A central focus of this evaluation is the identification of false positives—specifically, instances where images labeled as neutral are incorrectly classified as NSFW categories such as pornographic, hentai, or sexually suggestive content. This definition was chosen intentionally, as false positives in NSFW systems can lead to unnecessary censorship, degraded user experience, and ethical concerns when benign content is misclassified. Rather than treating all misclassifications equally, this targeted analysis prioritizes the most operationally costly errors.
+
+The evaluation pipeline iterates through the test dataset and performs single-image inference, extracting the model’s top prediction and associated confidence score. By considering only the highest-confidence prediction, the analysis mirrors typical deployment scenarios in which a single label is used to drive downstream decisions. When a false positive is detected, both the metadata and the corresponding image are preserved. This design decision enables qualitative inspection, allowing visual patterns and recurring failure modes to be examined rather than relying solely on numerical summaries.</p>
+<p>Saving the misclassified images to disk serves an important diagnostic purpose. Quantitative metrics can indicate that false positives exist, but visual inspection is often required to understand why the model fails in specific cases. Through this process, I can evaluate whether errors arise from ambiguous imagery, dataset labeling noise, bias in the training data, or limitations of the model’s learned representations. This form of human-in-the-loop auditing is especially valuable in content moderation tasks, where subjective interpretation and cultural context play a significant role.
+
+In addition to batch-level auditing, I implemented a standalone inference utility intended for single-image classification. This component functions as a lightweight interface for probing model behavior interactively, allowing arbitrary images to be passed through the classifier and returning a ranked distribution over all learned NSFW categories. Presenting confidence scores alongside predicted labels provides transparency into the model’s certainty and helps distinguish between confident misclassifications and borderline cases where predictions are inherently ambiguous.</p>
+            
+
+<p>This inference interface mirrors how the model would be integrated into a production system, making it useful not only for testing but also for demonstration and downstream application development. By formatting outputs in a human-readable manner, it enables rapid qualitative evaluation and supports exploratory analysis of edge cases. The use of hardware acceleration during inference further ensures that performance characteristics observed during testing are representative of real-time deployment scenarios.</p>
+<p>Together, these post-training components reflect a broader design philosophy that emphasizes interpretability, error analysis, and responsible deployment. Rather than treating model training as the endpoint, I view it as one stage in an iterative process that includes systematic auditing and empirical validation. By explicitly examining false positives and providing tools for direct interaction with the classifier, this approach acknowledges the limitations of purely metric-driven evaluation and prioritizes a deeper understanding of model behavior in practice.</p>
+
+
+
+
+
+
+
+
+
+            <h2>3. Visual Overview</h2>
+            <p>
+            
+            </p>
+
+            
+
+            <div class="graph-container">
+                <canvas id="barGraph"></canvas>
+            </div>
+
+            <h2>4. Conclusion</h2>
+            <p>
+                What I find most compelling about the final model is not just its quantitative performance, but its consistency and behavior under scrutiny. Through targeted false positive analysis and direct inference testing, the classifier repeatedly demonstrated an ability to generalize beyond its training data while maintaining a nuanced understanding of visual context. For a task as inherently ambiguous as NSFW classification, this balance between sensitivity and restraint is difficult to achieve, and the model’s performance exceeded my initial expectations.
+
+The Vision Transformer architecture proved to be particularly well-suited for this problem. Its ability to reason globally across an image allowed it to capture subtle contextual cues that would likely be missed by more localized approaches. Fine-tuning the model rather than training from scratch proved to be a decisive advantage, enabling strong results with a relatively modest training setup while preserving robustness and stability throughout the process.
+
+Equally important to me was the model’s reliability during inference. Whether evaluated at scale across unseen test data or interactively on individual images, the classifier behaved in a predictable and interpretable manner. Confidence scores aligned well with visual intuition, and the structured auditing of false positives provided reassurance that errors were not random, but instead traceable to genuinely ambiguous cases. This level of transparency is critical for building trust in systems intended for content moderation or filtering.
+
+Ultimately, this project reinforced my belief that strong machine learning systems are not defined solely by architecture choice or benchmark metrics, but by the care taken in their design, evaluation, and validation. The final model represents more than a trained network—it reflects an iterative, deliberate process that prioritizes generalization, interpretability, and real-world applicability. I am genuinely proud of how this system turned out, and I see it as a solid foundation for future improvements, extensions, and responsible deployment.
+            </p>
+
+            <img src="assets/confusion_matrix1.png" alt="confusion matrix">
+        </article>
+    </main>
+
+   <script>
+let chart = null;
+
+function createChart() {
+    if (chart) return;
+
+    const ctx = document.getElementById('barGraph').getContext('2d');
+
+    chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                'Overall Accuracy',
+                'Precision (Weighted)',
+                'Safe Rate',
+                'F1-Score'
+            ],
+            datasets: [{
+                label: 'Model Performance (%)',
+                data: [93.8, 98.5, 99.61, 93.0],
+                backgroundColor: [
+                    '#FF8B32',
+                    '#F38A21',
+                    '#D45800',
+                    '#E87919'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1400,
+                easing: 'easeOutQuart'
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#ffffff' }
+                },
+                datalabels: {
+                    color: '#ffffff',
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: value => value + '%',
+                    font: { weight: 'bold', size: 12 }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#cccccc' },
+                    grid: { color: '#222222' }
+                },
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: '#cccccc',
+                        callback: value => value + '%'
+                    },
+                    grid: { color: '#222222' }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
+
+// OBSERVE THE *CONTAINER*, NOT THE CANVAS
+const target = document.querySelector('.graph-container');
+
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                createChart();
+                observer.disconnect(); // animate once
+            }
+        });
+    },
+    {
+        threshold: 0.6 // triggers when 60% visible
+    }
+);
+
+observer.observe(target);
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+</body>
+</html>
